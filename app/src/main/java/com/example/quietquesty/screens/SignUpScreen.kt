@@ -33,7 +33,7 @@ import com.example.quietquesty.navigation.PostOfficeAppRouter
 import com.example.quietquesty.navigation.Screen
 
 @Composable
-fun SignUpScreen(loginViewModel: SignupViewModel = viewModel()) {
+fun SignUpScreen(signupViewModel: SignupViewModel = viewModel()) {
 
     Box(modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center) {
@@ -52,36 +52,36 @@ fun SignUpScreen(loginViewModel: SignupViewModel = viewModel()) {
                     labelValue = stringResource(id = R.string.first_name),
                     painterResource(id = R.drawable.profile),
                     onTextSelected = {
-                        loginViewModel.onEvent(SignupUIEvent.FirstNameChanged(it))
+                        signupViewModel.onEvent(SignupUIEvent.FirstNameChanged(it))
                     },
-                    errorStatus = loginViewModel.registrationUIState.value.firstNameError
+                    errorStatus = signupViewModel.registrationUIState.value.firstNameError
                 )
 
                 MyTextField(
                     labelValue = stringResource(id = R.string.last_name),
                     painterResource(id = R.drawable.profile),
                     onTextSelected = {
-                        loginViewModel.onEvent(SignupUIEvent.LastNameChanged(it))
+                        signupViewModel.onEvent(SignupUIEvent.LastNameChanged(it))
                     },
-                    errorStatus = loginViewModel.registrationUIState.value.lastNameError
+                    errorStatus = signupViewModel.registrationUIState.value.lastNameError
                 )
 
                 MyTextField(
                     labelValue = stringResource(id = R.string.email),
                     painterResource(id = R.drawable.message),
                     onTextSelected = {
-                        loginViewModel.onEvent(SignupUIEvent.EmailChanged(it))
+                        signupViewModel.onEvent(SignupUIEvent.EmailChanged(it))
                     },
-                    errorStatus = loginViewModel.registrationUIState.value.emailError
+                    errorStatus = signupViewModel.registrationUIState.value.emailError
                 )
 
                 PasswordTextFieldComponent(
                     labelValue = stringResource(id = R.string.password),
                     painterResource(id = R.drawable.ico_lock),
                     onTextSelected = {
-                        loginViewModel.onEvent(SignupUIEvent.PasswordChanged(it))
+                        signupViewModel.onEvent(SignupUIEvent.PasswordChanged(it))
                     },
-                    errorStatus = loginViewModel.registrationUIState.value.passwordError
+                    errorStatus = signupViewModel.registrationUIState.value.passwordError
                 )
 
                 CheckboxComponent(value = stringResource(id = R.string.terms_and_conditions),
@@ -89,16 +89,16 @@ fun SignUpScreen(loginViewModel: SignupViewModel = viewModel()) {
                         PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
                     },
                     onCheckedChange = {
-                        loginViewModel.onEvent(SignupUIEvent.PrivacyPolicyCheckBoxClicked(it))
+                        signupViewModel.onEvent(SignupUIEvent.PrivacyPolicyCheckBoxClicked(it))
                     })
 
                 Spacer(modifier = Modifier.height(40.dp))
 
                 ButtonComponent(value = stringResource(id = R.string.register),
                     onButtonClicked = {
-                        loginViewModel.onEvent(SignupUIEvent.RegisterButtonClicked)
+                        signupViewModel.onEvent(SignupUIEvent.RegisterButtonClicked)
                     },
-                    isEnabled = loginViewModel.allValidationsPassed.value)
+                    isEnabled = signupViewModel.allValidationsPassed.value)
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -110,7 +110,7 @@ fun SignUpScreen(loginViewModel: SignupViewModel = viewModel()) {
             }
         }
 
-        if(loginViewModel.signUpInProcess.value) {
+        if(signupViewModel.signUpInProcess.value) {
             CircularProgressIndicator()
         }
     }
